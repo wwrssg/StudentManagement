@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/suixingpay?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: ssg593707482
+    driver-class-name: com.mysql.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    username: wwrssg@qq.com
+    password: fhiredyyfjhpbehi
+    default-encoding: utf-8
+    port: 465
+    properties:
+      mail:
+        debug:
+          true
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory

@@ -1,0 +1,4 @@
+rootProject.name = 'springbootgradle'
+include 'mail'
+include 'springboot_mybatis'
+
