@@ -24,32 +24,49 @@ public class UserServiceImpl implements UserService {
         if(identity==1){
             Message message=new Message();
             Teacher dataBaseTeacher=teacherMapper.login(id);
-            if(dataBaseTeacher.getTPWD().equals(password)){
+            //System.out.println(dataBaseTeacher);
+
+            if(dataBaseTeacher!=null && dataBaseTeacher.getTPWD().equals(password)){
                 //登陆成功
                 message.setFlag(true);
                 message.setObject(dataBaseTeacher);
                 message.setState(dataBaseTeacher.getTNAME()+" 登陆成功！");
                 return message;
             }else{
-                message.setFlag(false);
-                message.setObject(dataBaseTeacher);
-                message.setState("登录失败，请重试");
-                return message;
+                if(dataBaseTeacher==null){
+                    message.setFlag(false);
+                    message.setObject(null);
+                    message.setState("老师账号不存在，请注册或使用学生身份登录");
+                    return message;
+                }else {
+                    message.setFlag(false);
+                    message.setObject(null);
+                    message.setState("密码错误，请重试");
+                    return message;
+                }
             }
+
         }else if(identity==2){
             Message message=new Message();
             Student dataBaseStudent=studentMapper.login(id);
-            if(dataBaseStudent.getSPWD().equals(password)){
+            if(dataBaseStudent!=null && dataBaseStudent.getSPWD().equals(password)){
                 //登陆成功
                 message.setFlag(true);
                 message.setObject(dataBaseStudent);
                 message.setState(dataBaseStudent.getSNAME()+" 登陆成功！");
                 return message;
             }else{
-                message.setFlag(false);
-                message.setObject(dataBaseStudent);
-                message.setState("登录失败，请重试");
-                return message;
+                if(dataBaseStudent==null){
+                    message.setFlag(false);
+                    message.setObject(null);
+                    message.setState("学生账号不存在，请注册或使用老师身份登录");
+                    return message;
+                }else {
+                    message.setFlag(false);
+                    message.setObject(null);
+                    message.setState("密码错误，请重试");
+                    return message;
+                }
             }
         }else{
             Message message=new Message();

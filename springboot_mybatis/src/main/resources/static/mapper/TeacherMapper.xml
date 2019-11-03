@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssg.dao.TeacherMapper">
+    <resultMap id="BaseResultMap" type="com.ssg.pojo.Teacher" >
+            <id column="TNO" jdbcType="VARCHAR" property="TNO" />
+        <result column="TNAME" jdbcType="VARCHAR" property="TNAME" />
+        <result column="TPWD" jdbcType="VARCHAR" property="TPWD" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    TNO, TNAME, TPWD
+    </sql>
+
+    <select id="login" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where TNO = #{TNO,jdbcType=VARCHAR}
+    </select>
+</mapper>
