@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssg.dao.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.ssg.pojo.Student" >
+            <id column="SNO" jdbcType="VARCHAR" property="SNO" />
+        <result column="SNAME" jdbcType="VARCHAR" property="SNAME" />
+        <result column="SPWD" jdbcType="VARCHAR" property="SPWD" />
+        <result column="SSEX" jdbcType="CHAR" property="SSEX" />
+        <result column="SBIRTH" jdbcType="VARCHAR" property="SBIRTH" />
+        <result column="SCHOOL" jdbcType="VARCHAR" property="SCHOOL" />
+        <result column="CLASSES" jdbcType="VARCHAR" property="CLASSES" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    SNO, SNAME, SPWD , SSEX , SBIRTH , SCHOOL , CLASSES
+    </sql>
+
+    <select id="login" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where SNO = #{SNO,jdbcType=VARCHAR}
+    </select>
+</mapper>

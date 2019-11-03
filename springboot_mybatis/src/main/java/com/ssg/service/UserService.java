@@ -1,13 +1,11 @@
 package com.ssg.service;
 
-import com.ssg.pojo.User;
+import com.ssg.entity.Message;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public interface UserService {
 
-    List<User> findAll();
-
+    Message login(String id, String password,int identity);
 }

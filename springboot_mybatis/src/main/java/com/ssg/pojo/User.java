@@ -31,4 +31,9 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "账号："+this.getId()+"用户名："+this.getUsername();
+    }
 }
