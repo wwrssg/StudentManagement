@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssg.dao.ScoreMapper">
+    <resultMap id="scoreDetails" type="com.ssg.pojo.Score">
+        <constructor>
+            <idArg column="ID" jdbcType="int" name="id"/>
+            <arg column="SNO" jdbcType="char" name="sNo"/>
+            <arg column="CNO" jdbcType="char" name="cNo"/>
+            <arg column="DEGERR" jdbcType="int" name="degerr"/>
+        </constructor>
+        <association property="cno" column="CNO" javaType="com.ssg.pojo.Course">
+            <id property="cno" column="CNO"/>
+            <result property="cName" column="CNAME"/>
+            <result property="tno" column="TNO"/>
+        </association>
+    </resultMap>
+
+    <update id="updateScore">
+        update score
+        <set>
+            <if test="sno != null">SNO={sNo}</if>
+            <if test="cno != null">CNO={cNo}</if>
+            <if test="degerr != null">DEGERR={degerr}</if>
+        </set>
+    </update>
+
+    <select id="getScoreById" parameterType="integer" resultMap="scoreDetails">
+        select SNO, CNO, DEGERR
+        from score
+        where ID = #{sNo}
+    </select>
+
+    <select id="getAllScore" resultType="com.ssg.pojo.Score">
+        select SNO, CNO, DEGERR
+        from score
+    </select>
+
+    <delete id="deleteScore">
+        delete SNO, CNO, DEGERR
+        from score
+        where SNO = #{sNo}
+    </delete>
+
+    <select id="createScore" resultType="com.ssg.pojo.Course">
+        insert into score (SNO, CNO, DEGERR)
+        values
+        (#{sNo}, #{cNo}, #{DEGERR})
+
+    </select>
+</mapper>

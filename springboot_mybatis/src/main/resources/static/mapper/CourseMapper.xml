@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssg.dao.CourseMapper">
+    <resultMap id="courseDetails" type="com.ssg.pojo.Course">
+        <constructor>
+            <idArg column="CNO" jdbcType="char" name="cNo"/>
+            <arg column="CNAME" jdbcType="varchar" name="cName"/>
+            <arg column="TNO" jdbcType="char" name="tNo"/>
+        </constructor>
+    </resultMap>
+
+    <update id="updateCourse">
+        update course
+        <set>
+          <if test="cName != null">CNAME=#{cName}</if>
+          <if test="tno != null">TNO=#{tno}</if>
+        </set>
+    </update>
+
+    <select id="getAllCourse" resultType="com.ssg.pojo.Course">
+        select CNO, CNAME, TNO
+        from course
+    </select>
+
+    <select id="getCourseById" resultMap="courseDetails">
+        select CNO, CNAME, TNO
+        from course
+        where CNO = #{cNo}
+    </select>
+
+    <delete id="deleteCourse">
+        delete CNO, CNAME, TNO
+        from course
+        where CNO = #{cNo}
+    </delete>
+
+    <select id="createCourse" resultType="com.ssg.pojo.Course">
+        insert into Course (CNO, CNAME, TNO)
+        values
+        (#{cNo}, #{cName}, #{tNo})
+
+    </select>
+</mapper>

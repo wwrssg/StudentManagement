@@ -21,4 +21,44 @@
     from student
     where SNO = #{SNO,jdbcType=VARCHAR}
     </select>
+    <!--根据班级与学生名获取指定/全部学生信息列表-->
+    <select id="selectAll" parameterType="student" resultType="com.ssg.pojo.Student">
+            SELECT SNO, SNAME, SSEX, SBIRTH, CLASSES
+            FROM student
+        </select>
+
+    <!-- 根据学号查询指定学生信息 -->
+    <select id="findBySno" resultType="student" parameterType="com.ssg.pojo.Student">
+            SELECT SNO, SNAME, SSEX, SBIRTH, CLASSES
+            FROM student
+            WHERE SNO = #{SNO}
+        </select>
+
+    <!-- 添加学生信息 -->
+    <insert id="insert" parameterType="student">
+            INSERT INTO
+            student(SNO, SNAME, SSEX, SBIRTH, CLASSES)
+            VALUES
+            (#{SNO}, #{SNAME}, #{SSEX}, #{SBIRTH}, #{CLASSES})
+        </insert>
+
+    <!-- 根据id修改指定学生信息 -->
+    <update id="update" parameterType="student">
+        update student
+        <set>
+            <if test="sName != null">SNAME=#{SNAME},</if>
+            <if test="sSex != null">SSEX=#{SSEX},</if>
+            <if test="sBirth != null">SBIRTH=#{SBIRTH},</if>
+            <if test="classes != null">CLASSES=#{CLASSES}</if>
+        </set>
+        where SNO = #{SNO}
+    </update>
+
+    <!-- 根据id批量删除指定学生信息 -->
+    <delete id="deleteById">
+        DELETE FROM
+        student
+        WHERE
+        SNO = #{SNO}
+    </delete>
 </mapper>
